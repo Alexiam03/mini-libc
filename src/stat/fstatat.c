@@ -15,7 +15,7 @@
 	)
 
 /* Structure describing file characteristics as defined in linux/stat.h */
-struct statx {
+/*struct statx {
 	uint32_t stx_mask;
 	uint32_t stx_blksize;
 	uint64_t stx_attributes;
@@ -39,15 +39,30 @@ struct statx {
 	uint32_t stx_dev_minor;
 	uint64_t spare[14];
 };
+*/
 
 int fstatat_statx(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat_statx(). Use statx and makedev above. */
-	return -1;
+	long result = syscall(__NR_statx, fd, path, flag, STATX_BASIC_STATS);
+
+	if(result < 0)
+	{
+		errno = -result;
+		return -1;
+	}
+	return 0;
 }
 
 int fstatat(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat(). Use fstatat_statx(). */
-	return -1;
+	long result = fstatat_statx(fd, path, st, flag);
+
+	if(result < 0)
+	{
+		errno = -result;
+		return -1;
+	}
+	return 0;
 }
