@@ -10,10 +10,14 @@ int ftruncate(int fd, off_t length)
 
 	long result = syscall(__NR_ftruncate, fd, length);
 
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result;
 		return -1;
 	}
 	return 0;
 }
+
+
+
+

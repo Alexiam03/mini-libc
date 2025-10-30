@@ -44,9 +44,10 @@
 int fstatat_statx(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat_statx(). Use statx and makedev above. */
+	(void)st;
 	long result = syscall(__NR_statx, fd, path, flag, STATX_BASIC_STATS);
 
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result;
 		return -1;
@@ -59,10 +60,14 @@ int fstatat(int fd, const char *restrict path, struct stat *restrict st, int fla
 	/* TODO: Implement fstatat(). Use fstatat_statx(). */
 	long result = fstatat_statx(fd, path, st, flag);
 
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result;
 		return -1;
 	}
 	return 0;
 }
+
+
+
+

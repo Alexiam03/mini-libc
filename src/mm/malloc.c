@@ -23,12 +23,12 @@ void *malloc(size_t size)
 {
 	/* TODO: Implement malloc(). */
 
-	if(size == 0)
+	if (size == 0)
 		return NULL;
 
 	//MAP_ANONYMOUS si MAP_PRIVATE => nu e legat la niciun fisier
 	void *result = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if(result == MAP_FAILED) //daca esueaza
+	if (result == MAP_FAILED) //daca esueaza
 	{
 		errno = ENOMEM;
 		return NULL;
@@ -51,7 +51,7 @@ void *calloc(size_t nmemb, size_t size)
 	size_t total = nmemb * size;
 	void *result = malloc(total);
 
-	if(!result )
+	if (!result )
 		return NULL;
 
 	memset(result, 0, total); //umple memoria incepand de la adresa result
@@ -62,12 +62,12 @@ void free(void *ptr)
 {
 	/* TODO: Implement free(). */
 
-	if(ptr == NULL)
+	if (ptr == NULL)
 		return;
 
 	size_t size = get_alloc_size(ptr);
 
-	if(size == 0)
+	if (size == 0)
 	{
 		errno = EINVAL;
 		return;
@@ -76,7 +76,7 @@ void free(void *ptr)
 	mem_list_del(ptr);
 
 	int res = munmap(ptr, size);
-	if(res < 0)
+	if (res < 0)
 		errno = EINVAL;
 }
 
@@ -84,17 +84,17 @@ void *realloc(void *ptr, size_t size)
 {
 	/* TODO: Implement realloc(). */
 
-	if(ptr == NULL)
+	if (ptr == NULL)
 		return malloc(size);
 
-	if(size == 0)
+	if (size == 0)
 	{
 		free(ptr);
 		return NULL;
 	}
 
 	void *result = malloc(size);
-	if( !result )
+	if ( !result )
 		return NULL;
 
 	size_t old_size = get_alloc_size(ptr);
@@ -108,7 +108,7 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	/* TODO: Implement reallocarray(). */
 
-	if( size != 0 && nmemb > SIZE_MAX / size)
+	if ( size != 0 && nmemb > SIZE_MAX / size)
 	{
 		errno = ENOMEM;
 		return NULL;
@@ -118,7 +118,7 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size)
 
 	void *new = realloc(ptr, totalSize);
 
-	if(new == NULL && totalSize != 0)
+	if (new == NULL && totalSize != 0)
 	{
 		errno = ENOMEM;
 		return NULL;
@@ -126,3 +126,7 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size)
 
 	return new;
 }
+
+
+
+

@@ -10,10 +10,14 @@ off_t lseek(int fd, off_t offset, int whence)
 
 	long result = syscall(__NR_lseek, fd, offset, whence);
 
-	if( result < 0)
+	if ( result < 0)
 	{
 		errno = -result;
 		return -1;
 	}
 	return (off_t)result; //returnam noua pozitie in fisier
 }
+
+
+
+

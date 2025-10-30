@@ -11,12 +11,16 @@ int stat(const char *restrict path, struct stat *restrict buf)
 
 	//apeleaza syscall-ul fstat pentru a obtine informatii despre fisier
 	long result = syscall(__NR_newfstatat, AT_FDCWD, path, buf, 0);
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result; //syscall-ul a esuat
 		return -1;
 	}
-		
+
 
 	return 0;
 }
+
+
+
+

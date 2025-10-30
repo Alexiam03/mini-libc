@@ -5,7 +5,7 @@
 
 int nanosleep(const struct timespec *req, struct timespec *rem)
 {
-    if(req == NULL)
+    if (req == NULL)
     {
         errno = EINVAL;
         return -1;
@@ -13,7 +13,7 @@ int nanosleep(const struct timespec *req, struct timespec *rem)
 
     long result = syscall(__NR_nanosleep, req, rem);
 
-    if( result < 0)
+    if (result < 0)
     {
         errno = -result;
         return -1;
@@ -21,3 +21,6 @@ int nanosleep(const struct timespec *req, struct timespec *rem)
 
     return 0;
 }
+
+
+

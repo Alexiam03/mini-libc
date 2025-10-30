@@ -4,9 +4,8 @@
 
 char *strcpy(char *destination, const char *source)
 {
-
 	/* TODO: Implement strcpy(). */
-	
+
 	int i = 0;
 	while((destination[i] = source[i]) != '\0')
 		i++;
@@ -34,7 +33,7 @@ char *strcat(char *destination, const char *source)
 	int ls = 0;					//pt lungimea lui source
 	while(source[ls])
 		destination[ld++] = source[ls++];
-		
+
 	destination[ld] = '\0';
 
 	return destination;
@@ -52,7 +51,7 @@ char *strncat(char *destination, const char *source, size_t len)
 
 	while(source[ls] && (l++ < len))
 		destination[ld++] = source[ls++];
-		
+
 	destination[ld] = '\0';
 	return destination;
 }
@@ -63,15 +62,15 @@ int strcmp(const char *str1, const char *str2)
 	int i = 0;
 	while(str1[i] && str2[i])
 	{
-		if(str1[i] > str2[i])
+		if (str1[i] > str2[i])
 			return 1;
 		else if (str1[i] < str2[i])
 				return -1;
 		i++;
 	}
-	if(str1[i] == '\0' && str2[i] == '\0')
+	if (str1[i] == '\0' && str2[i] == '\0')
 		return 0;
-	else if(str1[i] == '\0')
+	else if (str1[i] == '\0')
 			return -1;
 		else
 			return 1;
@@ -83,9 +82,9 @@ int strncmp(const char *str1, const char *str2, size_t len)
 	size_t l = 0;
 	while(str1[l] && str2[l] && (l < len))
 	{
-		if(str1[l] > str2[l])
+		if (str1[l] > str2[l])
 			return 1;
-		else if(str1[l] < str2[l])
+		else if (str1[l] < str2[l])
 				return -1;
 		l++;
 	}
@@ -95,9 +94,9 @@ int strncmp(const char *str1, const char *str2, size_t len)
 
 	if (str1[l] == str2[l]) //ambele s-au terminat in acelasi timp
 		return 0;
-	else if(str1[l] == '\0') //primul s a terminat mai repede
+	else if (str1[l] == '\0') //primul s a terminat mai repede
 			return -1;
-		else 
+		else
 			return 1;
 }
 
@@ -117,12 +116,12 @@ char *strchr(const char *str, int c)
 	int i = 0;
 	while(str[i] != '\0')
 	{
-		if(str[i] == (char)c )
+		if (str[i] == (char)c )
 			return (char *)&str[i];
 		i++;
 	}
-	
-	if((char )c == '\0') //caracterul cautat c este nul
+
+	if ((char )c == '\0') //caracterul cautat c este nul
 		return (char *) &str[i];
 	return NULL;
 }
@@ -135,16 +134,15 @@ char *strrchr(const char *str, int c)
 
 	while(str[i])
 	{
-		if(str[i] == (char )c )
+		if (str[i] == (char )c )
 			last = (char *) &str[i];
 		i++;
 	}
 
-	if((char )c == '\0')
+	if ((char )c == '\0')
 		return (char* ) &str[i];
 
 	return last;
-	//return NULL;
 }
 
 char *strstr(const char *haystack, const char *needle)
@@ -152,19 +150,25 @@ char *strstr(const char *haystack, const char *needle)
 	/* TODO: Implement strstr(). */
 	size_t i, j;
 
-	if(*needle == '\0')
+	if (*needle == '\0'){
 		return (char* )haystack;
+	}
 
-		for(i = 0; haystack[i] != 0; i++)
-				if(haystack[i] == needle[0])
+	for(i = 0; haystack[i] != 0; i++){
+		if (haystack[i] == needle[0])
+			{
+				for(j = 0; needle[j] != '\0'; j++)
 				{
-					for(j = 0; needle[j] != '\0'; j++)
-						if(haystack[i+j] != needle[j])
+					if (haystack[i+j] != needle[j]){
 							break;
-					if(needle[j] == '\0')
-						return (char *) &haystack[i];
+						}
 				}
 
+				if (needle[j] == '\0'){
+					return (char *) &haystack[i];
+				}
+			}
+	}
 	return NULL;
 }
 
@@ -174,20 +178,23 @@ char *strrstr(const char *haystack, const char *needle)
 	size_t i, j;
 	char * last = NULL;
 
-	if(*needle == '\0')
+	if (*needle == '\0'){
 		return (char* )haystack;
+	}
 
 		for(i = 0; haystack[i] != 0; i++)
-				if(haystack[i] == needle[0])
+				if (haystack[i] == needle[0])
 				{
 					for(j = 0; needle[j] != '\0'; j++)
-						if(haystack[i+j] != needle[j])
+						if (haystack[i+j] != needle[j]){
 							break;
-					if(needle[j] == '\0')
+						}
+
+					if (needle[j] == '\0'){
 						last =  (char *) &haystack[i];
+					}
 				}
 	return last;
-	//return NULL;
 }
 
 void *memcpy(void *destination, const void *source, size_t num)
@@ -208,17 +215,16 @@ void *memmove(void *destination, const void *source, size_t num)
 	unsigned char *dest = destination;
 	const unsigned char *src = source;
 
-	if( dest == src || num == 0)
+	if (dest == src || num == 0)
 		return destination;
-
-	if (dest < src ) //sirurile nu se suprapun deci se copiaza normal
+	if (dest < src)
+	{//sirurile nu se suprapun deci se copiaza normal
 		for(size_t i = 0; i < num; i++)
 			dest[i] = src[i];
-
-	else //copiere inversa pentru sirurile care se suprapun
+	} else {//copiere inversa pentru sirurile care se suprapun
 		for(size_t i = num; i > 0; i--)
 			dest[i-1] = src[i-1];
-
+	}
 	return destination;
 }
 
@@ -230,11 +236,10 @@ int memcmp(const void *ptr1, const void *ptr2, size_t num)
 	const unsigned char *p2 = ptr2;
 
 	for(size_t i = 0; i < num; i++)
-		if(p1[i] != p2[i])
+		if (p1[i] != p2[i])
 			return (int)p1[i] - (int)p2[i];
 
 	return 0;
-	//return -1;
 }
 
 void *memset(void *source, int value, size_t num)
@@ -249,3 +254,7 @@ void *memset(void *source, int value, size_t num)
 
 	return source;
 }
+
+
+
+

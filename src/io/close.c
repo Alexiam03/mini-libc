@@ -10,10 +10,14 @@ int close(int fd)
 	/* TODO: Implement close(). */
 	long result = syscall(__NR_close, fd);
 
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result;
 		return -1;
 	}
 	return 0;
 }
+
+
+
+

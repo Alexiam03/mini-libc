@@ -13,7 +13,7 @@ int truncate(const char *path, off_t length)
 	//deschidem fisier cu permisiuni de scriere
 	int fd = syscall(__NR_openat, AT_FDCWD, path, O_WRONLY, 0);
 
-	if(fd < 0)
+	if (fd < 0)
 	{
 		errno = -fd;
 		return -1;
@@ -22,10 +22,14 @@ int truncate(const char *path, off_t length)
 	long result = syscall(__NR_ftruncate, fd, length); //apelam ftruncate pt a schimba dimensiunea
 	syscall(__NR_close, fd); //inchidem fisierul
 
-	if(result < 0)
+	if (result < 0)
 	{
 		errno = -result;
 		return -1;
 	}
 	return 0;
 }
+
+
+
+

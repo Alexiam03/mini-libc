@@ -19,3 +19,7 @@ long syscall(long num, ...)
 
 	return __syscall(num, a, b, c, d, e, f);
 }
+
+
+
+

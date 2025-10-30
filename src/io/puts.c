@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <unistd.h>
 #include <internal/syscall.h>
 #include <string.h>
@@ -5,17 +6,17 @@
 
 int puts(const char *s)
 {
-    if(s == NULL)
+    if (s == NULL)
     {
         errno = EINVAL; //invalid argument
         return -1;
     }
 
-    size_t len = strlen(s); 
-    //scriem sirul 
+    size_t len = strlen(s);
+    //scriem sirul
     long result = syscall(__NR_write, 1, s, len);
 
-    if(result < 0)
+    if (result < 0)
     {
         errno = -result;
         return -1;
@@ -30,3 +31,4 @@ int puts(const char *s)
 
     return 0;
 }
+
