@@ -4,6 +4,7 @@
 #define __STDIO_H__	1
 
 #ifdef __cplusplus
+#include <cstdio>
 extern "C" {
 #endif
 

@@ -5,7 +5,15 @@
 #include <errno.h>
 
 off_t lseek(int fd, off_t offset, int whence)
-{
+{//schimba pozitia curenta de citire/scriere intr-un fisier deschis
 	/* TODO: Implement lseek(). */
-	return -1;
+
+	long result = syscall(__NR_lseek, fd, offset, whence);
+
+	if( result < 0)
+	{
+		errno = -result;
+		return -1;
+	}
+	return (off_t)result; //returnam noua pozitie in fisier
 }

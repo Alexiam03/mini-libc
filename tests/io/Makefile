@@ -10,7 +10,7 @@ SRCS = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.o,$(SRCS))
 EXECS = $(patsubst %.c,%,$(SRCS))
 
-
+BINARIES = stat open_close_create_file puts ...
 .PHONY: all clean src
 
 all: $(EXECS)

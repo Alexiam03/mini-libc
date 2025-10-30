@@ -20,7 +20,7 @@ int close(int fd);
 off_t lseek(int fd, off_t offset, int whence);
 int truncate(const char *path, off_t length);
 int ftruncate(int fd, off_t length);
-unsigned int sleep(unsigned int seconds);
+
 
 #ifdef __cplusplus
 }
