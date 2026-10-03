@@ -7,7 +7,7 @@
 
 ssize_t write(int fd, const void *buf, size_t len)
 {
-	int ret = syscall(__NR_write, fd, buf, len);
+	int ret = syscall(__NR_write, fd, buf, len); //va fi nr de octeti scrisi sau o eroare neg
 
 	if (ret < 0) {
 		errno = -ret;

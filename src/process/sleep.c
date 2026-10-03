@@ -10,7 +10,7 @@ unsigned int sleep(unsigned int seconds)
     req.tv_sec = seconds;
     req.tv_nsec = 0;
 
-    int result = nanosleep(&req, NULL);
+    int result = nanosleep(&req, NULL); //null ptc daca timpul e intrerupt, timpul ramas nu e raportat inapoi
 
     if (result < 0) //syscall-ul esueaza si returneaza timpul ramas
         return seconds;

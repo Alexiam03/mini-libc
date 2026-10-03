@@ -23,7 +23,7 @@ int puts(const char *s)
     }
 
     char newline = '\n';
-    result = syscall(__NR_write, 1, &newline, 1);
+    result = syscall(__NR_write, 1, &newline, 1); //1 este descriptor pt stdout
     if (result < 0) {
         errno = -result;
         return -1;
